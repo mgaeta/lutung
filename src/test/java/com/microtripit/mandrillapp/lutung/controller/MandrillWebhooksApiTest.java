@@ -1,45 +1,22 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.controller;
 
 import java.io.IOException;
 
-import junit.framework.Assert;
-
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.microtripit.mandrillapp.lutung.MandrillApi;
-import com.microtripit.mandrillapp.lutung.MandrillApiTest;
 import com.microtripit.mandrillapp.lutung.model.MandrillApiError;
 import com.microtripit.mandrillapp.lutung.view.MandrillWebhook;
+import junit.framework.Assert;
 
 /**
  * @author rschreijer
  * @since Mar 22, 2013
  */
-public final class MandrillWebhooksApiTest {
-	private static MandrillApi mandrillApi;
-			
-	
-	@BeforeClass
-	public static final void runBeforeClass() {
-		final String key = MandrillApiTest.getMandrillApiKey();
-		if(key != null) {
-			mandrillApi = new MandrillApi(key);
-		} else {
-			mandrillApi = null;
-		}
-	}
-	
-	@Before
-	public final void runBefore() {
-		Assume.assumeNotNull(mandrillApi);
-	}
-	
+public final class MandrillWebhooksApiTest extends LutungApiTest {
+
 	@Test
 	public final void testList() throws IOException, MandrillApiError {
 		final MandrillWebhook[] webhooks = mandrillApi.webhooks().list();
@@ -48,13 +25,13 @@ public final class MandrillWebhooksApiTest {
 			Assert.assertNotNull(w.getId());
 		}
 	}
-	
+
 	@Test(expected=MandrillApiError.class)
 	public final void testInfoWithoutId() throws IOException, MandrillApiError {
 		mandrillApi.webhooks().info(null);
 		Assert.fail();
 	}
-	
+
 	@Test
 	public final void testInfo() throws IOException, MandrillApiError {
 		final MandrillWebhook[] webhooks = mandrillApi.webhooks().list();
