@@ -13,6 +13,9 @@ target/
 .project
 .settings
 
+# IntelliJ
+.idea/
+
 # Spring
 .springBeans
 
