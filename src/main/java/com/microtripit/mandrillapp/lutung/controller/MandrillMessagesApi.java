@@ -128,16 +128,14 @@ public final class MandrillMessagesApi {
       final Map<String,String> mergeVars, final MandrillMessage m,
       final Boolean async)
 					throws MandrillApiError, IOException {
-
-		final HashMap<String,Object> params = MandrillUtil.paramsWithKey(key);
+    final HashMap<String,Object> params = MandrillUtil.paramsWithKey(key);
 		params.put("template_name", templateName);
     params.put("template_content", MandrillUtil.variableMapToParams(templateContent));
-    params.put("merge_vars", MandrillUtil.variableMapToParams(mergeVars));
+    m.setGlobalMergeVars(MandrillUtil.mergeVarMapAsList(mergeVars));
 		params.put("message", m);
 		params.put("async", async);
 		return MandrillUtil.query(rootUrl+ "messages/send-template.json",
 				params, MandrillMessageStatus[].class);
-
 	}
 
 	/**

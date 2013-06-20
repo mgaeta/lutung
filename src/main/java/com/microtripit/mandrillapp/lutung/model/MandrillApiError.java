@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.microtripit.mandrillapp.lutung.model;
 
@@ -12,14 +12,14 @@ import com.google.gson.Gson;
 public class MandrillApiError extends Throwable {
 	private static final long serialVersionUID = 1L;
 	private MandrillError error;
-	
+
 	public MandrillApiError() { super(); }
 	public MandrillApiError(final String msg) { super(msg); }
 	public MandrillApiError(final Throwable t) { super(t); }
-	public MandrillApiError(final String msg, final Throwable t) { 
+	public MandrillApiError(final String msg, final Throwable t) {
 		super(msg,t);
 	}
-	
+
 	/**
 	 * @return The error status returned by the Mandrill API.
 	 */
@@ -27,7 +27,7 @@ public class MandrillApiError extends Throwable {
 		return error.getStatus();
 	}
 	/**
-	 * @return <code>true</code> if this exception has a 
+	 * @return <code>true</code> if this exception has a
 	 * Mandrill API error status; <code>false</code> otherwise.
 	 */
 	public final boolean hasMandrillErrorStatus() {
@@ -40,7 +40,7 @@ public class MandrillApiError extends Throwable {
 		return error.getName();
 	}
 	/**
-	 * @return <code>true</code> if this exception has a 
+	 * @return <code>true</code> if this exception has a
 	 * Mandrill API error name; <code>false</code> otherwise.
 	 */
 	public final boolean hasMandrillErrorName() {
@@ -53,7 +53,7 @@ public class MandrillApiError extends Throwable {
 		return error.getMessage();
 	}
 	/**
-	 * @return <code>true</code> if this exception has a 
+	 * @return <code>true</code> if this exception has a
 	 * Mandrill API error message; <code>false</code> otherwise.
 	 */
 	public final boolean hasMandrillErrorMessage() {
@@ -66,17 +66,17 @@ public class MandrillApiError extends Throwable {
 		return error.getCode();
 	}
 	/**
-	 * @return <code>true</code> if this exception has a 
+	 * @return <code>true</code> if this exception has a
 	 * Mandrill API error code; <code>false</code> otherwise.
 	 */
 	public final boolean hasMandrillErrorCode() {
 		return (error != null && error.hasCode());
 	}
-	
+
 	/**
-	 * <p>Generate a JSON string representation for the error 
+	 * <p>Generate a JSON string representation for the error
 	 * contained in this {@link MandrillApiError}.</p>
-	 * @return The error as returned by the Mandrill API, in 
+	 * @return The error as returned by the Mandrill API, in
 	 * JSON representation.
 	 */
 	public final String getMandrillErrorAsJson() {
@@ -84,22 +84,22 @@ public class MandrillApiError extends Throwable {
 			final Gson gson = LutungGsonUtils.createGsonBuilder()
 					.setPrettyPrinting().create();
 			return gson.toJson(error);
-			
+
 		} else {
 			return "{}";
-			
+
 		}
 	}
-	
+
 	protected final MandrillApiError withError(final MandrillError error) {
 		this.error = error;
 		return this;
 	}
-	
+
 	public static final class MandrillError {
 		private String status, name, message;
 		private Integer code;
-		
+
 		/**
 		 * @return The error status returned by the Mandrill API.
 		 */
@@ -107,7 +107,7 @@ public class MandrillApiError extends Throwable {
 			return status;
 		}
 		/**
-		 * @return <code>true</code> if this exception has a 
+		 * @return <code>true</code> if this exception has a
 		 * Mandrill API error status; <code>false</code> otherwise.
 		 */
 		public final boolean hasStatus() {
@@ -120,7 +120,7 @@ public class MandrillApiError extends Throwable {
 			return name;
 		}
 		/**
-		 * @return <code>true</code> if this exception has a 
+		 * @return <code>true</code> if this exception has a
 		 * Mandrill API error name; <code>false</code> otherwise.
 		 */
 		public final boolean hasName() {
@@ -142,7 +142,7 @@ public class MandrillApiError extends Throwable {
 			return code;
 		}
 		/**
-		 * @return <code>true</code> if this exception has a 
+		 * @return <code>true</code> if this exception has a
 		 * Mandrill API error code; <code>false</code> otherwise.
 		 */
 		public final boolean hasCode() {
@@ -150,5 +150,5 @@ public class MandrillApiError extends Throwable {
 		}
 
 	}
-	
+
 }
